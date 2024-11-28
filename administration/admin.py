@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Provider
+from .models import Provider, Customer, Pet
 from django.conf import settings
 from django.conf.urls.static import static
 from django.utils.html import format_html
@@ -27,3 +27,45 @@ class ProviderAdmin(admin.ModelAdmin):
             return format_html('<img src={} style="width: 64px;" /><br />' + str(obj.id), 
                             obj.main_photo.url)
         return obj.id
+
+class PetInline(admin.TabularInline):
+    model = Pet
+    extra = 1
+
+@admin.register(Customer)
+class CustomerAdmin(admin.ModelAdmin):
+    list_display =('identificador', 'nombre', 'apellido', 'direccion', )
+
+    inlines = [PetInline]
+
+    @admin.display(description="Identificador")
+    def identificador(self, obj):
+        return obj.id
+
+    @admin.display(description="Nombre")
+    def nombre(self, obj):
+        return obj.first_name
+
+    @admin.display(description="Apellido")
+    def apellido(self, obj):
+        return obj.last_name
+    
+    @admin.display(description="Direccion")
+    def direccion(self, obj):
+        return obj.address
+        
+
+@admin.register(Pet)
+class PetAdmin(admin.ModelAdmin):
+    list_display =('nombre', 'fotografia', )
+
+    @admin.display(description="Nombre")
+    def nombre(self, obj):
+        return obj.name
+    
+    @admin.display(description="Fotografia")
+    def fotografia(self, obj):
+        return format_html('<img src={} style="width: 64px;" /><br />' + str(obj.id), 
+                            obj.main_photo.url)
+        return obj.id
+    
