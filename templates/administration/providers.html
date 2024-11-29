@@ -1,0 +1,20 @@
+{% extends 'layout.html' %}
+
+{% block content %}
+
+<section>
+    <div class="card">
+        <div class="card-body">Paseadores</div>
+        <table class="table table-striped">
+            <tbody>
+                            {% for pr in provs %}
+            <tr>
+            <td>{{ pr.first_name }} {{ pr.last_name }}</td>
+            </tr>
+                            {% endfor %}
+            </tbody>
+            </table>
+    </div>
+</section>
+
+{% endblock %}
