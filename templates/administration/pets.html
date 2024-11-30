@@ -1,0 +1,30 @@
+{% extends 'layout.html' %}
+
+{% block content %}
+
+<section>
+    <div class="card w-100">
+        <div class="card-body">Mascotas</div>
+        <table class="table table-striped table-bordered w-100">
+            <thead>
+
+            </thead>
+            <tbody>
+                {% for pt in pets_list %}
+                <tr>
+                    <td>{{ pt.customer }}</td>
+                    <td>{{ pt.name }}</td>
+                    <td>{{ pt.age }}</td>
+                    <td>{{ pt.pedigree }}</td>
+                    <td><img src="{{ pt.main_photo.url }}" style="width: 100px; height: auto;"></td>
+                    <td>
+                        <a href="#" class="btn btn-danger">Ver mas</a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+            </table>
+    </div>
+</section>
+
+{% endblock %}

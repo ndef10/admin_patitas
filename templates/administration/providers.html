@@ -3,15 +3,24 @@
 {% block content %}
 
 <section>
-    <div class="card">
-        <div class="card-body">Paseadores</div>
-        <table class="table table-striped">
+    <div class="card w-100">
+        <div class="card-body">
+            Paseadores
+            <a class="btn btn-primary" href="/providers?sort_by=first_name&dir=asc">Ordenar Por Nombre</a>
+            <a class="btn btn-danger" href="/providers?sort_by=last_name&dir=asc">Ordenar Por Apellido</a>
+        </div>
+        <table class="table table-striped table-bordered w-100">
             <tbody>
-                            {% for pr in provs %}
-            <tr>
-            <td>{{ pr.first_name }} {{ pr.last_name }}</td>
-            </tr>
-                            {% endfor %}
+                {% for pr in providers_list %}
+                <tr>
+                    <td>{{ pr.first_name }}</td>
+                    <td>{{ pr.last_name }}</td>
+                    <td>{{ pr.description }}</td>
+                    <td>
+                        <a href="#" class="btn btn-primary">Ver mas</a>
+                    </td>
+                </tr>
+                {% endfor %}
             </tbody>
             </table>
     </div>
