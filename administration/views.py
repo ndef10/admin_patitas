@@ -1,4 +1,5 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
+from django.contrib import messages
 from .models import Provider, Customer, Pet
 
 # Create your views here.
@@ -45,3 +46,14 @@ def v_pets(request):
         "pets_list": Pet.objects.all()
     }
     return render(request, "administration/pets.html", context)
+
+def  v_customers(request):
+    if not request.user.is_authenticated:
+        messages.error(request, "Lo sentimos esta accion no esta permitida.")
+        return redirect("/")
+    
+    context = {
+        "customers_list": Customer.objects.all()
+
+    }
+    return render(request, "administration/customers.html", context)

@@ -19,6 +19,11 @@
                     <a href="/admin" class="w-100 px-4 py-2 text-white">Ir al Admin</a>
                     <a href="/providers" class="w-100 px-4 py-2 text-white">Proveedores</a>
                     <a href="/customers" class="w-100 px-4 py-2 text-white">Clientes</a>
+                    {% if user.is_authenticated %}
+                        <div class="px-4 py-2">
+                            Hola {{ user.username }}
+                        </div>
+                    {% endif %}
                 </div>
             </nav>
 
@@ -26,6 +31,11 @@
         </aside>
 
         <section class="p-4 w-100">
+            {% if messages %}
+                {% for message in messages %}
+                    <div class="alert {% if 'error' in message.tags %}alert-danger{% endif %}">{{ message }}</div>
+                {% endfor %}
+            {% endif %}
             {% block content %}
             {% endblock %}
 
